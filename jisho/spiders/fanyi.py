@@ -30,7 +30,7 @@ class FanyiSpider(scrapy.Spider):
         except IndexError:
             #没有这个词的句子就把页数当作零
             sentenceCount = 0
-        pageNum = sentenceCount//20 + 1
+        pageNum = sentenceCount//20 if sentenceCount % 20 == 0 else sentenceCount//20 + 1
         for i in range(pageNum):
             url = response.url.replace('page=1', f'page={str(i+1)}')
             host = '127.0.0.1'
